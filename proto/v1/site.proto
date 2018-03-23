@@ -6,16 +6,16 @@ import "site/proto/v1/structures.proto";
 import "google/api/annotations.proto";
 
 service SiteService {
-    rpc getList(getListRequest) returns (getListResponse) {
+    rpc findAll (FindAllRequest) returns (FindAllResponse) {
         option (google.api.http) = {
             get: "v1/site/list"
         };
     }
 }
 
-message getListRequest {
+message FindAllRequest {
 }
 
-message getListResponse {
+message FindAllResponse {
     repeated structures.Site site = 1;
 }
