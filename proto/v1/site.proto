@@ -17,5 +17,5 @@ message getListRequest {
 }
 
 message getListResponse {
-    repeated structures.Site = 1;
+    repeated structures.Site site = 1;
 }
