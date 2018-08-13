@@ -1,0 +1,12 @@
+syntax = 'proto3';
+
+package beget.site.v1.structures;
+
+import "google/api/annotations.proto";
+
+message Site {
+    uint32 id = 1;
+    string name = 2;
+    string path = 3;
+    bool is_frozen = 4;
+}

@@ -1,0 +1,21 @@
+syntax = 'proto3';
+
+package beget.site.v1.site;
+
+import "site/proto/v1/structures.proto";
+import "google/api/annotations.proto";
+
+service SiteService {
+    rpc findAll (FindAllRequest) returns (FindAllResponse) {
+        option (google.api.http) = {
+            get: "v1/site/list"
+        };
+    }
+}
+
+message FindAllRequest {
+}
+
+message FindAllResponse {
+    repeated structures.Site site = 1;
+}
