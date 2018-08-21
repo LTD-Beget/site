@@ -1,0 +1,22 @@
+syntax = 'proto3';
+
+package beget.site.v1.structures;
+
+message Site {
+    uint64 id = 1;
+    string document_root = 2;
+    repeated Domain domain = 3;
+    bool is_frozen = 4;
+    bool is_secure = 5;
+    string name = 6;
+}
+
+message Domain {
+    uint64 id = 1;
+    string fqdn = 2;
+    uint32 http_version = 3;
+    string nginx_template = 4;
+    string php_version = 5;
+    bool redis_session = 6;
+    bool ssl = 7;
+}

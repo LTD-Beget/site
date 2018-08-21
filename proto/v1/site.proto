@@ -1,0 +1,234 @@
+syntax = 'proto3';
+
+package beget.site.v1.site;
+
+import "google/api/annotations.proto";
+import "site/proto/v1/structures.proto";
+
+// SiteService
+service SiteService {
+    rpc GetList (GetSiteListRequest) returns (GetSiteListResponse) {
+        option (google.api.http) = {
+            get: "/v1/site"
+        };
+    }
+
+    rpc CreateSite (CreateSiteRequest) returns (CreateSiteResponse) {
+        option (google.api.http) = {
+            post: "/v1/site"
+            body: "*"
+        };
+    }
+
+    rpc deleteSite (DeleteSiteRequest) returns (DeleteSiteResponse) {
+        option (google.api.http) = {
+            delete: "/v1/site/{id}"
+            body: "*"
+        };
+    }
+
+    rpc linkDomain (LinkDomainRequest) returns (LinkDomainResponse) {
+        option (google.api.http) = {
+            post: "/v1/site/{id}/link"
+            body: "*"
+        };
+    }
+
+    rpc unlinkDomain (UnlinkDomainRequest) returns (UnlinkDomainResponse) {
+        option (google.api.http) = {
+            delete: "/v1/site/{id}/link"
+            body: "*"
+        };
+    }
+
+    rpc freezeSite (FreezeSiteRequest) returns (FreezeSiteResponse) {
+        option (google.api.http) = {
+            post: "/v1/site/{id}/freeze"
+            body: "*"
+        };
+    }
+
+    rpc unfreezeSite (UnfreezeSiteRequest) returns (UnfreezeSiteResponse) {
+        option (google.api.http) = {
+            delete: "/v1/site/{id}/freeze"
+            body: "*"
+        };
+    }
+
+    rpc isSiteFrozen (IsSiteFrozenRequest) returns (IsSiteFrozenResponse) {
+        option (google.api.http) = {
+            get: "/v1/site/{id}/freeze"
+            body: "*"
+        };
+    }
+}
+
+message GetSiteListRequest {}
+
+message GetSiteListResponse {
+    repeated beget.site.v1.structures.Site site = 1;
+}
+
+message CreateSiteRequest {
+    string name = 1;
+}
+
+message CreateSiteResponse {
+    oneof result {
+        Success sucess = 1;
+        Error error = 2;
+    }
+
+    message Success {
+        repeated beget.site.v1.structures.Site site = 1;
+    }
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+            VALIDATION_ERROR = 1;
+        }
+    }
+}
+
+message DeleteSiteRequest {
+    uint64 id = 1;
+}
+
+message DeleteSiteResponse {
+    oneof result {
+        Success sucess = 1;
+        Error error = 2;
+    }
+
+    message Success {
+    }
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+        }
+    }
+}
+
+message LinkDomainRequest {
+    uint64 id = 1;
+    uint64 domain_id = 2;
+}
+
+message LinkDomainResponse {
+    oneof result {
+        Success sucess = 1;
+        Error error = 2;
+    }
+
+    message Success {}
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+        }
+    }
+}
+
+message UnlinkDomainRequest {
+    uint64 id = 1;
+    uint64 domain_id = 2;
+}
+
+message UnlinkDomainResponse {
+    oneof result {
+        Success sucess = 1;
+        Error error = 2;
+    }
+
+    message Success {}
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+        }
+    }
+}
+
+}
+
+message FreezeSiteRequest {
+    uint64 id = 1;
+}
+
+message FreezeSiteResponse {
+    oneof result {
+        Success sucess = 1;
+        Error error = 2;
+    }
+
+    message Success {
+    }
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+        }
+    }
+}
+
+message UnfreezeSiteRequest {
+    uint64 id = 1;
+}
+
+message UnfreezeSiteResponse {
+    oneof result {
+        Success sucess = 1;
+        Error error = 2;
+    }
+
+    message Success {
+    }
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+        }
+    }
+}
+
+message IsSiteFrozenRequest {
+    uint64 id = 1;
+}
+
+
+message IsSiteFrozenResponse {
+    oneof result {
+        bool frozen = 1;
+        Error error = 2;
+    }
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+        }
+    }
+}
+
