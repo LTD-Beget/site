@@ -163,8 +163,6 @@ message UnlinkDomainResponse {
     }
 }
 
-}
-
 message FreezeSiteRequest {
     uint64 id = 1;
 }
