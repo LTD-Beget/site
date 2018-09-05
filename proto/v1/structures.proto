@@ -3,10 +3,9 @@ syntax = 'proto3';
 package beget.site.v1.structures;
 
 message Site {
-    uint64 id = 1;
+    string name = 1; //site name
     string document_root = 2; //user home dir based path
-    repeated string linked_fqdn = 3;
-    bool is_frozen = 4;
-    bool is_secure = 5;
-    string name = 6;
+    repeated string linked_fqdn = 3; //list of linked domains
+    bool is_frozen = 4; //is filesystem RO
+    bool is_secure = 5; //use ssl
 }
