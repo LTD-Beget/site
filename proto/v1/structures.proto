@@ -3,9 +3,9 @@ syntax = 'proto3';
 package beget.site.v1.structures;
 
 message Site {
-    string name = 1; //site name
-    string document_root = 2; //user home dir based path
-    repeated string linked_domain = 3; //list of linked domains, format: fqdn
-    bool is_frozen = 4; //is filesystem RO
-    bool is_isolatied = 5; //site isolation enabled
+    string name = 1; // Имя сайта
+    string document_root = 2; // Путь до корня сайта относительно корня аккаунта
+    repeated string linked_domain = 3; // список прилинкованных доменов в формате "fqdn"
+    bool is_frozen = 4; // флаг фаловой системы "только чтение"
+    bool is_isolated = 5; // флаг изоляции сайта
 }
