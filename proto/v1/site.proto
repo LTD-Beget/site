@@ -56,7 +56,6 @@ service SiteService {
     rpc freezeSite (FreezeSiteRequest) returns (FreezeSiteResponse) {
         option (google.api.http) = {
             post: "/v1/site/{name}/freeze"
-            body: "*"
         };
     }
 
