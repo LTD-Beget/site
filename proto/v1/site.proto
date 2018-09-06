@@ -33,7 +33,6 @@ service SiteService {
     rpc deleteSite (DeleteSiteRequest) returns (DeleteSiteResponse) {
         option (google.api.http) = {
             delete: "/v1/site/{name}"
-            body: "*"
         };
     }
 
@@ -49,7 +48,6 @@ service SiteService {
     rpc unlinkDomain (UnlinkDomainRequest) returns (UnlinkDomainResponse) {
         option (google.api.http) = {
             delete: "/v1/site/{name}/link"
-            body: "*"
         };
     }
 
@@ -65,7 +63,6 @@ service SiteService {
     rpc unfreezeSite (UnfreezeSiteRequest) returns (UnfreezeSiteResponse) {
         option (google.api.http) = {
             delete: "/v1/site/{name}/freeze"
-            body: "*"
         };
     }
 }
@@ -146,7 +143,7 @@ message LinkDomainResponse {
 
 message UnlinkDomainRequest {
     string name = 1; // Имя сайта
-    repeated string fqdn = 2;  // список доменов, подлежащих прилинковке
+    repeated string fqdn = 2; // список доменов, подлежащих прилинковке
 }
 
 message UnlinkDomainResponse {
@@ -182,4 +179,3 @@ message UnfreezeSiteRequest {
 
 message UnfreezeSiteResponse {
 }
-
