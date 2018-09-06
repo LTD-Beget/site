@@ -47,7 +47,8 @@ service SiteService {
     // Открепление домена от сайта
     rpc unlinkDomain (UnlinkDomainRequest) returns (UnlinkDomainResponse) {
         option (google.api.http) = {
-            delete: "/v1/site/{name}/link"
+            post: "/v1/site/{name}/unlink"
+            body: "*"
         };
     }
 
