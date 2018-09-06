@@ -8,21 +8,21 @@ import "site/proto/v1/structures.proto";
 // SiteService
 service SiteService {
     // Получить список сайтов пользователя
-    rpc GetList (GetSiteListRequest) returns (GetSiteListResponse) {
+    rpc getList (GetSiteListRequest) returns (GetSiteListResponse) {
         option (google.api.http) = {
             get: "/v1/site"
         };
     }
 
     // Получить сайт по имени
-    rpc GetSite (GetSiteRequest) returns (GetSiteResponse) {
+    rpc getSite (GetSiteRequest) returns (GetSiteResponse) {
         option (google.api.http) = {
             get: "/v1/site/{name}"
         };
     }
 
     // Создание нового сайта
-    rpc CreateSite (CreateSiteRequest) returns (CreateSiteResponse) {
+    rpc createSite (CreateSiteRequest) returns (CreateSiteResponse) {
         option (google.api.http) = {
             post: "/v1/site"
             body: "*"
