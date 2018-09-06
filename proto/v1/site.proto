@@ -8,21 +8,21 @@ import "site/proto/v1/structures.proto";
 // SiteService
 service SiteService {
     // Получить список сайтов пользователя
-    rpc GetList (GetSiteListRequest) returns (GetSiteListResponse) {
+    rpc getList (GetSiteListRequest) returns (GetSiteListResponse) {
         option (google.api.http) = {
             get: "/v1/site"
         };
     }
 
     // Получить сайт по имени
-    rpc GetSite (GetSiteRequest) returns (GetSiteResponse) {
+    rpc getSite (GetSiteRequest) returns (GetSiteResponse) {
         option (google.api.http) = {
             get: "/v1/site/{name}"
         };
     }
 
     // Создание нового сайта
-    rpc CreateSite (CreateSiteRequest) returns (CreateSiteResponse) {
+    rpc createSite (CreateSiteRequest) returns (CreateSiteResponse) {
         option (google.api.http) = {
             post: "/v1/site"
             body: "*"
@@ -33,7 +33,6 @@ service SiteService {
     rpc deleteSite (DeleteSiteRequest) returns (DeleteSiteResponse) {
         option (google.api.http) = {
             delete: "/v1/site/{name}"
-            body: "*"
         };
     }
 
@@ -48,7 +47,7 @@ service SiteService {
     // Открепление домена от сайта
     rpc unlinkDomain (UnlinkDomainRequest) returns (UnlinkDomainResponse) {
         option (google.api.http) = {
-            delete: "/v1/site/{name}/link"
+            post: "/v1/site/{name}/unlink"
             body: "*"
         };
     }
@@ -57,7 +56,6 @@ service SiteService {
     rpc freezeSite (FreezeSiteRequest) returns (FreezeSiteResponse) {
         option (google.api.http) = {
             post: "/v1/site/{name}/freeze"
-            body: "*"
         };
     }
 
@@ -65,7 +63,6 @@ service SiteService {
     rpc unfreezeSite (UnfreezeSiteRequest) returns (UnfreezeSiteResponse) {
         option (google.api.http) = {
             delete: "/v1/site/{name}/freeze"
-            body: "*"
         };
     }
 }
@@ -146,7 +143,7 @@ message LinkDomainResponse {
 
 message UnlinkDomainRequest {
     string name = 1; // Имя сайта
-    repeated string fqdn = 2;  // список доменов, подлежащих прилинковке
+    repeated string fqdn = 2; // список доменов, подлежащих прилинковке
 }
 
 message UnlinkDomainResponse {
@@ -182,4 +179,3 @@ message UnfreezeSiteRequest {
 
 message UnfreezeSiteResponse {
 }
-
