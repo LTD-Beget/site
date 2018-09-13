@@ -88,12 +88,8 @@ message CreateSiteRequest {
 
 message CreateSiteResponse {
     oneof result {
-        Success sucess = 1;
+        beget.site.v1.structures.Site site = 1;
         Error error = 2;
-    }
-
-    message Success {
-        repeated beget.site.v1.structures.Site site = 1;
     }
 
     message Error {
@@ -128,6 +124,7 @@ message LinkDomainResponse {
     }
 
     message Success {
+        beget.site.v1.structures.Site site = 1;
     }
 
     message Error {
@@ -153,6 +150,7 @@ message UnlinkDomainResponse {
     }
 
     message Success {
+        beget.site.v1.structures.Site site = 1;
     }
 
     message Error {
@@ -171,6 +169,7 @@ message FreezeSiteRequest {
 }
 
 message FreezeSiteResponse {
+    beget.site.v1.structures.Site site = 1;
 }
 
 message UnfreezeSiteRequest {
@@ -178,4 +177,5 @@ message UnfreezeSiteRequest {
 }
 
 message UnfreezeSiteResponse {
+    beget.site.v1.structures.Site site = 1;
 }
