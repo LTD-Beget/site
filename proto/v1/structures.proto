@@ -8,4 +8,5 @@ message Site {
     repeated string linked_domain = 3; // список прилинкованных доменов в формате "fqdn"
     bool is_frozen = 4; // флаг фаловой системы "только чтение"
     bool is_isolated = 5; // флаг изоляции сайта
+    uint64 id = 6; // ID сайта
 }
