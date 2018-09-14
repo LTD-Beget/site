@@ -119,13 +119,10 @@ message LinkDomainRequest {
 
 message LinkDomainResponse {
     oneof result {
-        Success sucess = 1;
+        beget.site.v1.structures.Site site = 1;
         Error error = 2;
     }
 
-    message Success {
-        beget.site.v1.structures.Site site = 1;
-    }
 
     message Error {
         Code code = 1;
@@ -145,12 +142,8 @@ message UnlinkDomainRequest {
 
 message UnlinkDomainResponse {
     oneof result {
-        Success sucess = 1;
-        Error error = 2;
-    }
-
-    message Success {
         beget.site.v1.structures.Site site = 1;
+        Error error = 2;
     }
 
     message Error {
