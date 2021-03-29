@@ -1,0 +1,161 @@
+syntax = 'proto3';
+
+package beget.site.v1.profiler;
+
+import "google/api/annotations.proto";
+import "site/proto/v1/structures.proto";
+
+// ProfilerService
+service ProfilerService {
+    // Проверка статуса установленного GUI
+    rpc getGuiStage (GetGuiStageRequest) returns (GetGuiStageResponse) {
+        option (google.api.http) = {
+            get: "/v1/site/profiler/gui"
+        };
+    }
+
+    // Установить GUI пользователю
+    rpc reinstallGui (ReinstallGuiRequest) returns (ReinstallGuiResponse) {
+        option (google.api.http) = {
+            post: "/v1/site/profiler/gui"
+            body: "*"
+        };
+    }
+
+    // Получить список всех активных профайлеров
+    rpc getProfilerList (GetProfilerListRequest) returns (GetProfilerListResponse) {
+        option (google.api.http) = {
+            get: "/v1/site/profiler/list"
+        };
+    }
+
+    // Включить профайлер для сайта на определенном домене
+    rpc enableProfiler (EnableProfilerRequest) returns (EnableProfilerResponse) {
+        option (google.api.http) = {
+            post: "/v1/site/profiler/domain/{domain_id}"
+            body: "*"
+        };
+    }
+
+    // Выключить профайлер для сайта на определенном домене
+    rpc disableProfiler (DisableProfilerRequest) returns (DisableProfilerResponse) {
+        option (google.api.http) = {
+            delete: "/v1/site/profiler/domain/{domain_id}"
+        };
+    }
+}
+
+message GetGuiStageRequest {
+}
+
+message GetGuiStageResponse {
+    oneof stage {
+        NotInstalled not_installed = 1;
+        Installing installing = 2;
+        Completed completed = 3;
+        Error error = 4;
+    }
+
+    message NotInstalled {
+        bool first_installation = 1;
+    }
+    
+    message Installing {}
+    
+    message Completed {
+        string login = 1;
+        string password = 2;
+    }
+    
+    message Error {
+        string message = 1;
+    }
+}
+
+message ReinstallGuiRequest {
+}
+
+message ReinstallGuiResponse {
+    oneof result {
+        Success success = 1;
+        Error error = 2;
+    }
+
+    message Success {}
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+            OUT_OF_QUOTA = 1;
+            ORDER_PROCESSING = 2;
+            GUI_NOT_INSTALLED = 3;
+        }
+    }
+}
+
+message GetProfilerListRequest {
+}
+
+message GetProfilerListResponse {
+    repeated Profiler profiler = 1;
+}
+
+message EnableProfilerRequest {
+    uint64 domain_id = 1;
+}
+
+message EnableProfilerResponse {
+    oneof result {
+        Success success = 1;
+        Error error = 2;
+    }
+
+    message Success {}
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+            DOMAIN_NOT_LINKED = 1;
+            OUT_OF_QUOTA = 2;
+            OUT_OF_SITE = 3;
+            PLAN_NOT_SUPPORTED = 4;
+            INVALID_DOMAIN = 5;
+            INVALID_PHP_VERSION = 6;
+        }
+    }
+}
+
+message DisableProfilerRequest {
+    uint64 domain_id = 1;
+}
+
+message DisableProfilerResponse {
+    oneof result {
+        Success success = 1;
+        Error error = 2;
+    }
+
+    message Success {}
+
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+            DOMAIN_NOT_LINKED = 1;
+        }
+    }
+}
+
+message Profiler {
+    uint64 site_id = 1;
+    uint64 domain_id = 2;
+    string created_at = 3;
+}
