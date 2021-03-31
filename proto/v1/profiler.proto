@@ -158,4 +158,5 @@ message Profiler {
     uint64 site_id = 1;
     uint64 domain_id = 2;
     string created_at = 3;
+    string ip = 4;
 }
