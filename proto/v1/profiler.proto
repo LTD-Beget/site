@@ -109,11 +109,9 @@ message EnableProfilerRequest {
 
 message EnableProfilerResponse {
     oneof result {
-        Success success = 1;
+        Profiler success = 1;
         Error error = 2;
     }
-
-    message Success {}
 
     message Error {
         Code code = 1;
