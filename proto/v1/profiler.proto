@@ -109,7 +109,7 @@ message EnableProfilerRequest {
 
 message EnableProfilerResponse {
     oneof result {
-        Profiler success = 1;
+        Profiler profiler = 1;
         Error error = 2;
     }
 
